@@ -40,6 +40,7 @@ include('./Layouts/sidebar.php');
                             <tr>
                                 <th rowspan="2" style="text-align: center;">SL No</th>
                                 <th rowspan="2" style="text-align: center;">Course Level Name</th>
+                                <th rowspan="2" style="text-align: center;">Course Name</th>
                                 <th rowspan="2" style="text-align: center;">Course Level Image</th>
                                 <th colspan="5" style="text-align: center;">Operation</th>
                             </tr>
@@ -47,21 +48,68 @@ include('./Layouts/sidebar.php');
                                 <th style="text-align: center;">View</th>
                                 <th style="text-align: center;">Update</th>
                                 <th style="text-align: center;">Delete</th>
-                                <th style="text-align: center;">Activate</th>
-                                <th style="text-align: center;">Deactivate</th>
+                                <th style="text-align: center;">Status</th>
                             </tr>
                         </thead>
-                        <tbody>
+						<tbody>
+				<?php
+ 					 	$select_view_course_level_query="select * from course_level_tbl"; 
+					   	//Change this order by Concept
+ 					 	$result_view_course_level_query=mysqli_query($connection,$select_view_course_level_query);
+ 					   	while($course_level=mysqli_fetch_assoc($result_view_course_level_query))
+ 					   	{
+				
+							$course_level_id = $course_level['course_level_id'];
+							$course_id = $course_level['course_id'];
+							$course_level_name = $course_level['course_level_name'];
+							$course_level_image = $course_level['course_level_image'];
+							$course_level_status = $course_level['course_level_status'];
+
+					   
+       			?>
+
+
+
+
+
+                        
                             <tr data-expanded="true">
                                 <td>1</td>
-                                <td>Phones</td>
-                                <td><img src="./img/1.png" alt="" srcset=""></td>
-                                <td><input type="button" value="View" class="button1"></td>
-                                <td><input type="button" value="Update" class="button3"></td>
-                                <td><input type="button" value="Delete" class="button2"></td>
-                                <td><input type="button" value="Activate" class="button3"></td>
-                                <td><input type="button" value="Deactivate" class="button2"></td>
-                            </tr>                            
+                                <td><?php echo $course_level_name ?></td>
+
+								<?php
+									$select_view_course_query="select * from course_tbl where course_id = '$course_id'";
+								   	$result_view_course_query=mysqli_query($connection,$select_view_course_query);
+									while($course=mysqli_fetch_assoc($result_view_course_query))
+									{
+										$course_id = $course['course_id'];
+										$course_name = $course['course_name'];
+								?>
+
+								<td><?php echo $course_name ?></td>
+                                <td><img src="./Course_Level/<?php echo $course_level_image ?>" alt="" srcset="" style="height: 100px; width: 100px; "></td>
+                                <td><a href="./view_course_level.php"><input type="button" value="View" class="button1"></td>
+                                <td><a href="./update_course_level.php?update_course_level_id=<?php echo $course_level_id ?>"><input type="button" value="Update" class="button3"></a></td>
+                                <td><a href="./delete_course_level.php?delete_course_level_id=<?php echo $course_level_id ?>"><input type="button" value="Delete" class="button2"></a></td>
+                               
+										<?php
+											if ($course_level_status == "active") 
+											{
+												echo "<td><input type='button' value='Activate' class='button3'></td>";
+											}
+											else
+											{
+												echo "<td><input type='button' value='Deactivate' class='button2'></td>";
+											}
+										?>
+								
+                                
+                            </tr> 
+							
+							<?php
+					   			}	
+							}
+							?>
                         </tbody>
                     </table>
                 </div>

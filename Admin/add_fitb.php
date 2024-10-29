@@ -61,17 +61,22 @@ include('./Layouts/sidebar.php');
                             </div>
                             <div class="panel-body">
                                 <div class="row">
-                                    <form action="" method="post" enctype="multipart/form-data">
+                                    <form action="" method="post">
                                         <div class="form-group">
-
+<!-- 
+										fitb_id 	course_id 	course_level_id 	
+										fitb_title 	fitb_description 	first_sentence 	
+										last_sentence 	option_a 	option_b 	option_c 	option_d 	
+										answer_key 	filb_status 
+										-->
 											<div class="col-md-6 form-group">
                                         	    <label for="exampleInputEmail1">Title Name:*</label>
-                                        	    <input type="text" placeholder=".col-md-3" class="form-control" name="student_first_name" autocomplete="off" required="required">
+                                        	    <input type="text" placeholder=".col-md-3" class="form-control" name="fitb_title" autocomplete="off" required="required">
                                         	</div>
 
 											<div class="col-md-6 form-group">
                                         	    <label for="exampleInputEmail1">Description:*</label>
-                                        	    <input type="text" placeholder=".col-md-3" class="form-control" name="student_first_name" autocomplete="off" required="required">
+                                        	    <input type="text" placeholder=".col-md-3" class="form-control" name="fitb_description" autocomplete="off" required="required">
                                         	</div>
 
                                             <div class="col-sm-6">
@@ -101,51 +106,46 @@ include('./Layouts/sidebar.php');
 
 											<div class="col-md-6 form-group">
                                                     <label for="exampleInputEmail1">Select Course Level :*</label>
-                                                    <select id="course_level" class="form-control m-bot15" style="text-align: center;" name="course_id" autocomplete="off" required="required">
+                                                    <select id="course_level" class="form-control m-bot15" style="text-align: center;" name="course_level_id" autocomplete="off" required="required">
                                                         
                                                     </select>
                                             </div>
 
 											<div class="col-md-4 form-group">
                                                     <label for="exampleInputEmail1"> Fill in the Blanks First Sentence:*</label>
-													<input type="text" placeholder=".col-md-6" class="form-control" name="student_first_name" autocomplete="off" required="required">
+													<input type="text" placeholder=".col-md-6" class="form-control" name="first_sentence" autocomplete="off" required="required">
                                             </div>
 
-											<div class="col-md-4 form-group">
-													<br>
-													<label for="blackspace">_____________________________________________________________________ </label>
-													
-                                            </div>
-
+											
 											<div class="col-md-4 form-group">
                                                     <label for="exampleInputEmail1"> Fill in the Blanks Last Sentence:*</label>
-													<input type="text" placeholder=".col-md-6" class="form-control" name="student_first_name" autocomplete="off" required="required">
+													<input type="text" placeholder=".col-md-6" class="form-control" name="last_sentence" autocomplete="off" required="required">
                                             </div>
 
 											<div class="col-md-6 form-group">
                                                     <label for="exampleInputEmail1"> Option A:*</label>
-													<input type="text" placeholder=".col-md-6" class="form-control" name="student_first_name" autocomplete="off" required="required">
+													<input type="text" placeholder=".col-md-6" class="form-control" name="option_a" autocomplete="off" required="required">
                                             </div>
 
 											<div class="col-md-6 form-group">
                                                     <label for="exampleInputEmail1"> Option B:*</label>
-													<input type="text" placeholder=".col-md-6" class="form-control" name="student_first_name" autocomplete="off" required="required">
+													<input type="text" placeholder=".col-md-6" class="form-control" name="option_b" autocomplete="off" required="required">
                                             </div>
 											
 											<div class="col-md-6 form-group">
                                                     <label for="exampleInputEmail1"> Option C:*</label>
-													<input type="text" placeholder=".col-md-6" class="form-control" name="student_first_name" autocomplete="off" required="required">
+													<input type="text" placeholder=".col-md-6" class="form-control" name="option_c" autocomplete="off" required="required">
                                             </div>
 
 											<div class="col-md-6 form-group">
                                                     <label for="exampleInputEmail1"> Option D:*</label>
-													<input type="text" placeholder=".col-md-6" class="form-control" name="student_first_name" autocomplete="off" required="required">
+													<input type="text" placeholder=".col-md-6" class="form-control" name="option_d" autocomplete="off" required="required">
                                             </div>
 											
 											<div class="col-md-3 form-group"></div>
 											<div class="col-md-6 form-group">
                                                     <label for="exampleInputEmail1"> Answer Key:*</label>
-													<select id="" class="form-control m-bot15" name="" style="text-align: center;">
+													<select id="" class="form-control m-bot15" name="answer_key" style="text-align: center;">
                                             			<option selected disabled>Select Answer Key</option>
 														<option value="option_a">Option A</option>
 														<option value="option_b">Option B</option>
@@ -157,7 +157,7 @@ include('./Layouts/sidebar.php');
 											
 											<div class="col-md-12">
 												<center>
-                                            		<input type="submit" value="Submit" class="btn btn-info" name="insert_course">
+                                            		<input type="submit" value="Submit" class="btn btn-info" name="insert_fitb">
 												</center>
 											</div>					 
                                         
@@ -282,3 +282,48 @@ include('./Layouts/footer.php');
 	<!-- //calendar -->
 </body>
 </html>
+
+<?php
+
+    if (isset($_POST['insert_fitb'])) {
+
+
+		$course_id = $_POST['course_id'];
+		$course_level_id = $_POST['course_level_id'];
+        $fitb_title =  $_POST['fitb_title'];
+		$fitb_description = $_POST['fitb_description'];
+		$first_sentence =  $_POST['first_sentence'];
+		$last_sentence = $_POST['last_sentence'];
+		$option_a = $_POST['option_a'];
+		$option_b = $_POST['option_b'];
+		$option_c = $_POST['option_c'];
+		$option_d = $_POST['option_d'];
+		$answer_key =  $_POST['answer_key'];
+		$filb_status = "active";
+
+
+        if ($course_id == '' or $course_level_id == '' or $fitb_title == '' or $fitb_description == '' or $first_sentence == '' or 
+		$last_sentence == '' or $option_a == '' or $option_b == '' or $option_c == '' or $option_d == '' or $answer_key == '') 
+        {
+            echo "<script>alert('Please Fill the Blank Spaces')</script>";
+            exit;
+        } 
+        else 
+        {
+
+            $insert_fitb_query = "insert into filling_in_the_blanks_tbl (course_id,course_level_id,fitb_title,fitb_description,first_sentence,last_sentence,option_a,option_b,option_c,option_d,answer_key,filb_status) 
+			values ('$course_id','$course_level_id','$fitb_title','$fitb_description','$first_sentence','$last_sentence','$option_a','$option_b','$option_c','$option_d','$answer_key','$filb_status')";
+            $insert_fitb_execute_query=mysqli_query($connection,$insert_fitb_query);
+            if($insert_fitb_execute_query)
+            {
+              echo "<script>alert('Fill in the Blanks Successfully')</script>";
+              echo "<script>window.open('add_course_level.php','_self')</script>";
+            }
+            else
+            {
+                die(mysqli_error($connection));
+            }
+        }
+    }
+
+    ?>

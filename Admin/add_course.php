@@ -53,6 +53,13 @@ include('./Layouts/sidebar.php');
 
                                             <div class="col-sm-3"></div>
                                             <br><br><br>
+                                            <div class="col-sm-3"></div>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control round-input" name="course_description">
+                                            </div>
+
+                                            <div class="col-sm-3"></div>
+                                            <br><br><br>
                                             <div class="col-lg-3"></div>
                                             <div class="col-lg-6">
                                                 <input type="file" class="form-control" id="course_image" placeholder="Enter Your Course" name="course_image">
@@ -212,6 +219,7 @@ include('./Layouts/sidebar.php');
 
 
         $course_name = $_POST['course_name'];
+        $course_description = $_POST['course_description'];
         $course_status = 'active';
 
         //Image Accessing 
@@ -233,7 +241,7 @@ include('./Layouts/sidebar.php');
         {
             move_uploaded_file($temp_image,"./Course_Image/$course_image");
 
-            $insert_course_query="insert into course_tbl (course_name,course_image,course_status) values ('$course_name','$course_image','$course_status')";
+            $insert_course_query="insert into course_tbl (course_name,course_description,course_image,course_status) values ('$course_name','$course_description','$course_image','$course_status')";
             $course_execute_query=mysqli_query($connection,$insert_course_query);
             if($course_execute_query)
             {

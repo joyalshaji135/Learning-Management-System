@@ -244,7 +244,7 @@ include('./Layouts/footer.php');
         } 
         else 
         {
-            move_uploaded_file($temp_image,"./Course_Image/$course_level_image");
+            move_uploaded_file($temp_image,"./Course_Level/$course_level_image");
 
             $insert_course_level_query="insert into course_level_tbl (course_id,course_level_name,course_level_image,course_level_status) values ('$course_id','$course_level_name','$course_level_image','$course_level_status')";
             $course_level_execute_query=mysqli_query($connection,$insert_course_level_query);

@@ -64,14 +64,16 @@ include('./Layouts/sidebar.php');
                                     <form action="" method="post" enctype="multipart/form-data">
                                         <div class="form-group">
 
+										<!-- course_id 	course_level_id 	video_class_name 	video_class_title 	video_class_description 	
+										 video_class_videos 	video_class_url 	video_class_status -->
 											<div class="col-md-6 form-group">
                                         	    <label for="exampleInputEmail1">Title Name:*</label>
-                                        	    <input type="text" placeholder=".col-md-3" class="form-control" name="student_first_name" autocomplete="off" required="required">
+                                        	    <input type="text" placeholder=".col-md-3" class="form-control" name="video_class_title" autocomplete="off" required="required">
                                         	</div>
 
 											<div class="col-md-6 form-group">
                                         	    <label for="exampleInputEmail1">Description:*</label>
-                                        	    <input type="text" placeholder=".col-md-3" class="form-control" name="student_first_name" autocomplete="off" required="required">
+                                        	    <input type="text" placeholder=".col-md-3" class="form-control" name="video_class_description" autocomplete="off" required="required">
                                         	</div>
 
                                             <div class="col-sm-6">
@@ -101,7 +103,7 @@ include('./Layouts/sidebar.php');
 
 											<div class="col-md-6 form-group">
                                                     <label for="exampleInputEmail1">Select Course Level :*</label>
-                                                    <select id="course_level" class="form-control m-bot15" style="text-align: center;" name="course_id" autocomplete="off" required="required">
+                                                    <select id="course_level" class="form-control m-bot15" style="text-align: center;" name="course_level_id" autocomplete="off" required="required">
                                                         
                                                     </select>
                                             </div>
@@ -111,13 +113,28 @@ include('./Layouts/sidebar.php');
 													<label for="exampleInputEmail1">Video Class:*</label>
 													<br>
 													<br>
-													<input type="file" name="" id="" autocomplete="off" required="required">
+													<input type="file" name="video_class_videos" id="" autocomplete="off" required="required">
+													</center>
+											</div>
+
+											<div class="col-md-12 form-group">
+												<center>
+													<label for="exampleInputEmail1">OR</label>
 													</center>
 											</div>
 											
+											<div class="col-md-3 form-group"></div>
+
+											<div class="col-md-6 form-group">
+											<label for="exampleInputEmail1">Link:*</label>
+											<input type="text" placeholder=".col-md-3" class="form-control" name="video_class_url" autocomplete="off" required="required">
+											</div>
+
+											<div class="col-md-3 form-group"></div>
+
 											<div class="col-md-12">
 												<center>
-                                            		<input type="submit" value="Submit" class="btn btn-info" name="insert_course">
+                                            		<input type="submit" value="Submit" class="btn btn-info" name="insert_video_class">
 												</center>
 											</div>					 
                                         
@@ -242,3 +259,54 @@ include('./Layouts/footer.php');
 	<!-- //calendar -->
 </body>
 </html>
+
+<?php
+
+if (isset($_POST['insert_video_class'])) {
+
+	// course_id 	course_level_id 	video_class_title 	video_class_description 	
+	// video_class_videos 	video_class_url 	video_class_status
+
+	$course_id = $_POST['course_id'];
+	$course_level_id = $_POST['course_level_id'];
+	$video_class_title = $_POST['video_class_title'];
+	$video_class_description = $_POST['video_class_description'];
+	$video_class_url = $_POST['video_class_url'];
+	$video_class_status = 'active';
+
+       //Image Accessing 
+
+	   $video_class_videos=$_FILES['video_class_videos']['name'];
+
+	   //Image Accessing for tmp Image
+
+	   $temp_image=$_FILES['video_class_videos']['tmp_name'];
+
+	
+
+	if ($course_id == '' or $course_level_id == '' or $video_class_title == '' or $video_class_description == '' or $video_class_videos == '' or $video_class_status == '') 
+	{
+		echo "<script>alert('Please Fill the Blank Spaces')</script>";
+		exit;
+	} 
+	else 
+	{
+		move_uploaded_file($temp_image,"./Video_Class/$video_class_videos");
+
+
+		$insert_video_class_query="insert into video_class_tbl (course_id,course_level_id,video_class_title,video_class_description,video_class_videos,video_class_url,video_class_status) 
+		values ('$course_id','$course_level_id','$video_class_title','$video_class_description','$video_class_videos','$video_class_url','$video_class_status')";
+		$video_class_execute_query=mysqli_query($connection,$insert_video_class_query);
+		if($video_class_execute_query)
+		{
+		  echo "<script>alert('Course inserted Successfully')</script>";
+		  echo "<script>window.open('add_video_class.php','_self')</script>";
+		}
+		else
+		{
+			die(mysqli_error($connection));
+		}
+	}
+}
+
+?>
