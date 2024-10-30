@@ -1,4 +1,3 @@
-
 <?php
 
 include('./include/connection.php');
@@ -83,20 +82,26 @@ include('./include/connection.php');
       <div class="container">
         <ul class="breadcrumbs-custom-path">
           <li><a href="index.html">Home</a></li>
+
           <?php
+             
+             if (isset($_GET['video_id'])) {
+                $video_id = $_GET['video_id'];
+
+                $select_course_level_query = "select * from course_level_tbl where course_level_id = $video_id";
+                $course_level_execute_query = mysqli_query($connection,$select_course_level_query);
+                while($course_level = mysqli_fetch_assoc($course_level_execute_query))
+                {
+                    $course_id = $course_level['course_id'];
+                    $video_category_name = $course_level['course_level_name'];
+                    
+          ?>
+          <li class="active"><span class="fa fa-chevron-right mx-2" aria-hidden="true"></span> <?php echo $video_category_name;
           
-          if (isset($_GET['video_class_id'])) {
-            $video_class_id = $_GET['video_class_id'];
-//  video_class_title 	video_class_description	video_thumbnail 	video_class_videos 	video_class_url 	video_class_status
-            $select_video_class_query = "select * from video_class_tbl where video_class_id = $video_class_id";
-            $video_class_execute_query = mysqli_query($connection,$select_video_class_query);
-            while ($video_class_catalog = mysqli_fetch_assoc($video_class_execute_query)) {
-                $video_class_title = $video_class_catalog['video_class_title'];
-                
-            
+             }
+            }
           
           ?>
-          <li class="active"><span class="fa fa-chevron-right mx-2" aria-hidden="true"></span> <?php echo $video_class_title; } }?>
         </li>
         </ul>
       </div>
@@ -104,62 +109,79 @@ include('./include/connection.php');
   </div>
   <!-- about page about section -->
 
- 
-    <!-- home page video popup section -->
-    <section class="w3l-videohny" id="video">
-    <div class="new-block py-5">
-        <div class="container py-lg-5">
+
+
+
+  <section class="w3l-index3" id="about1">
+    <div class="midd-w3 py-5">
+      <div class="container py-lg-5 py-md-3">
+        <div class="row">
+
         <?php
-          
-          if (isset($_GET['video_class_id'])) {
-            $video_class_id = $_GET['video_class_id'];
-//  video_class_title 	video_class_description	video_thumbnail 	video_class_videos 	video_class_url 	video_class_status
-            $select_video_class_query = "select * from video_class_tbl where video_class_id = $video_class_id";
-            $video_class_execute_query = mysqli_query($connection,$select_video_class_query);
-            while ($video_class_catalog = mysqli_fetch_assoc($video_class_execute_query)) {
-                $video_class_title = $video_class_catalog['video_class_title'];
-                $video_class_description = $video_class_catalog['video_class_description'];
-                $video_thumbnail = $video_class_catalog['video_thumbnail'];
-                $video_class_videos = $video_class_catalog['video_class_videos'];
-                $video_class_status = $video_class_catalog['video_class_status'];
-                
-            
-          
-          ?>
-                <div class="header-title mb-md-5 mb-4">
-                    <span class="sub-title">Top Video Class</span>
-                    <h3 class="hny-title text-left"> <?php echo $video_class_title; ?></h3>
-                    <p><?php echo $video_class_description; ?></p>
-                    <span class="" style="color: green;">View 0</span>
-                </div>
-                <div class="history-info position-relative" style="background: url(../Admin/Video_Thumbnail/<?php echo $video_thumbnail; ?>) no-repeat center;">
-                        <!--//video-->
-                        <a href="#small-dialog" class="popup-with-zoom-anim play-view text-center pl-3">
-                            <span class="video-play-icon">
-                                <span class="fa fa-play"></span>
-                            </span>
-                        </a>
+             if (isset($_GET['video_id'])) {
+                $course_level_id = $_GET['video_id'];
+	
+                $select_video_class_list_query = "select * from video_class_tbl where course_level_id = $course_level_id";
+                $video_class_list_execute_query = mysqli_query($connection,$select_video_class_list_query);
+                $count = 1;
+                while ($video_class_catalog = mysqli_fetch_assoc($video_class_list_execute_query)) {
+                    $video_class_id = $video_class_catalog['video_class_id'];
+                    $video_class_title = $video_class_catalog['video_class_title'];
+                    $video_class_description = $video_class_catalog['video_class_description'];
+                    $video_class_thumbnail = $video_class_catalog['video_thumbnail'];
+                    $video_class_status =  $video_class_catalog['video_class_status'];
+                    
+                    
+               
+        ?>
 
-                        <!-- dialog itself, mfp-hide class is required to make dialog hidden -->
-                        <div id="small-dialog" class="zoom-anim-dialog mfp-hide">
-                            <iframe src="../Admin/Video_Class/<?php echo $video_class_videos; ?>" frameborder="0"
-                                allow="autoplay; fullscreen" allowfullscreen></iframe>
-                        </div>
-                        <!--//video-->
-                </div>
-                <?php
-                    }
+
+          <div class="col-lg-6 mb-lg-5 mb-md-5 mb-4">
+            <img src="../Admin/Video_Thumbnail/<?php echo $video_class_thumbnail; ?>" alt="" class="radius-image-full img-fluid" style="height: 350px;" >
+          </div>
+          <div class="col-lg-6 pl-lg-5 ">
+            <div class="header-title">
+              <span class="sub-title">Class <?php echo $count; ?></span>
+              <h3 class="hny-title text-left"><?php echo $video_class_title; ?></h3>
+            </div>
+            <p class="mt-3"><?php echo $video_class_description; ?></p>
+            <?php
+                if ($video_class_status == "active") {
+                    echo "<a href='./vedio_class.php?video_class_id=$video_class_id' class='btn btn-style btn-primary mt-sm-5 mt-4'>Watch <span class='fa fa-chevron-right ml-2'
+                    aria-hidden='true'></span></a>";
                 }
-                ?>
+                else
+                {
+                    echo "<a href='index.html' class='btn btn-style btn-primary mt-sm-5 mt-4'>Locked<span class='fa fa-solid fa-lock ml-3'
+                    aria-hidden='true'></span></a>";
+                 }
+            ?>
+          </div>
+            <?php
+            $count+1;
+                }
+            }
+        ?>
+
         </div>
+      </div>
     </div>
-</section>
-<!-- //home page video popup section -->
+  </section>
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+  
     <!-- footer -->
     <section class="w3l-footer-29-main">
         <div class="footer-29 py-5">

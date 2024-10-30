@@ -140,9 +140,9 @@ include('./include/connection.php');
                                 <h4><a href="#feature" class="title-head"><?php echo $course_level_name ?></a></h4>
                                 <p class="mt-3"></p>
 
-                                <a class="btn btn-primary btn-style mt-4" href="./filling_in_the_blanks.php?filling_in_the_blanks_id=">Exe Class <span class="fa fa-chevron-right ml-2" aria-hidden="true"></span></a>
-                                <a class="btn btn-primary btn-style mt-4" href="./vedio_class.php?video_id=">Video Class <span class="fa fa-chevron-right ml-2" aria-hidden="true"></span></a>
-                                <a class="btn btn-primary btn-style mt-4" href="./quiz_class.php?quiz_id=">Quiz Class <span class="fa fa-chevron-right ml-2" aria-hidden="true"></span></a>
+                                <a class="btn btn-primary btn-style mt-4" href="./filling_in_the_blanks.php?filling_in_the_blanks_id=<?php echo $course_level_id ?>">Exe Class <span class="fa fa-chevron-right ml-2" aria-hidden="true"></span></a>
+                                <a class="btn btn-primary btn-style mt-4" href="./video_class_list.php?video_id=<?php echo $course_level_id ?>">Video Class <span class="fa fa-chevron-right ml-2" aria-hidden="true"></span></a>
+                                <a class="btn btn-primary btn-style mt-4" href="./quiz_class.php?quiz_id=<?php echo $course_level_id ?>">Quiz Class <span class="fa fa-chevron-right ml-2" aria-hidden="true"></span></a>
                                 
                             </div>
                         </div>

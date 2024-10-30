@@ -108,7 +108,15 @@ include('./Layouts/sidebar.php');
                                                     </select>
                                             </div>
 											
-											<div class="col-md-12 form-group">
+											<div class="col-md-6 form-group">
+												<center>
+													<label for="exampleInputEmail1">Video Class Thumbnail:*</label>
+													<br>
+													<br>
+													<input type="file" name="video_thumbnail" id="" autocomplete="off" required="required">
+													</center>
+											</div>
+											<div class="col-md-6 form-group">
 												<center>
 													<label for="exampleInputEmail1">Video Class:*</label>
 													<br>
@@ -127,7 +135,7 @@ include('./Layouts/sidebar.php');
 
 											<div class="col-md-6 form-group">
 											<label for="exampleInputEmail1">Link:*</label>
-											<input type="text" placeholder=".col-md-3" class="form-control" name="video_class_url" autocomplete="off" required="required">
+											<input type="text" placeholder=".col-md-3" class="form-control" name="video_class_url" autocomplete="off">
 											</div>
 
 											<div class="col-md-3 form-group"></div>
@@ -274,17 +282,25 @@ if (isset($_POST['insert_video_class'])) {
 	$video_class_url = $_POST['video_class_url'];
 	$video_class_status = 'active';
 
-       //Image Accessing 
+       //Video Accessing 
 
 	   $video_class_videos=$_FILES['video_class_videos']['name'];
 
-	   //Image Accessing for tmp Image
+	   //Video Accessing for tmp Image
 
 	   $temp_image=$_FILES['video_class_videos']['tmp_name'];
 
+	   //Video Thumbnail Accessing 
+
+	   $video_thumbnail=$_FILES['video_thumbnail']['name'];
+
+	   //Video Thumbnail Accessing for tmp Image
+
+	   $temp_thumbnail=$_FILES['video_thumbnail']['tmp_name'];
+
 	
 
-	if ($course_id == '' or $course_level_id == '' or $video_class_title == '' or $video_class_description == '' or $video_class_videos == '' or $video_class_status == '') 
+	if ($course_id == '' or $course_level_id == '' or $video_class_title == '' or $video_class_description == '' or $video_class_videos == '' or $video_class_status == '' or $video_thumbnail =='') 
 	{
 		echo "<script>alert('Please Fill the Blank Spaces')</script>";
 		exit;
@@ -293,9 +309,11 @@ if (isset($_POST['insert_video_class'])) {
 	{
 		move_uploaded_file($temp_image,"./Video_Class/$video_class_videos");
 
+		move_uploaded_file($temp_thumbnail,"./Video_Thumbnail/$video_thumbnail");
 
-		$insert_video_class_query="insert into video_class_tbl (course_id,course_level_id,video_class_title,video_class_description,video_class_videos,video_class_url,video_class_status) 
-		values ('$course_id','$course_level_id','$video_class_title','$video_class_description','$video_class_videos','$video_class_url','$video_class_status')";
+
+		$insert_video_class_query="insert into video_class_tbl (course_id,course_level_id,video_class_title,video_class_description,video_thumbnail,video_class_videos,video_class_url,video_class_status) 
+		values ('$course_id','$course_level_id','$video_class_title','$video_class_description','$video_thumbnail','$video_class_videos','$video_class_url','$video_class_status')";
 		$video_class_execute_query=mysqli_query($connection,$insert_video_class_query);
 		if($video_class_execute_query)
 		{

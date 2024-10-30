@@ -100,6 +100,65 @@
 
 
 
+  
+  <section class="w3l-contact-1 py-5" id="contact">
+        <div class="contacts-9 py-lg-5 py-md-4">
+            <div class="container">
+                <div class="d-grid contact-view mb-5 pb-lg-5">
+                    <div class="cont-details">
+                    <div class="contactct-fm-text text-left mb-md-5 mb-4">
+                            <div class="header-title mb-md-5 mt-4">
+                                <span class="sub-title">Fill in the Blacks Question</span>
+                                <h3 class="hny-title text-left">Title Name </h3>
+                                <p>Lorem Ipsum is simply dummy text of the printing _________ dummy text of the printing</p>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="map-content-3">
+                        <div class="contactct-fm map-content-9 pl-lg-4">
+                            <div class="contactct-fm-text text-left">
+                                <div class="header-title mb-md-5 mt-4">
+                                    <span class="sub-title">Fill</span>
+                                    <h3 class="hny-title text-left">Fill in the Blacks Options</h3>
+                                </div>
+                                <p class="mb-sm-5 mb-4">
+
+                                </p>
+                            </div>
+                            <form action="#" method="post">
+                                <div class="twice-two">
+                                    <label for="">Option A</label>
+                                        <input type="radio" class="form-control" name="w3lName" id="w3lName"
+                                        placeholder="" required="" style="border-radius: 100px;">
+                                    <label for="">Option B</label>
+                                        <input type="radio" class="form-control" name="w3lName" id="w3lName"
+                                        placeholder="asn" required="" style="border-radius: 100px;">
+                                    <label for="">Option C</label>
+                                        <input type="radio" class="form-control" name="w3lName" id="w3lName"
+                                        placeholder="" required="" style="border-radius: 100px;">
+                                    <label for="">Option D</label>
+                                        <input type="radio" class="form-control" name="w3lName" id="w3lName"
+                                        placeholder="asn" required="" style="border-radius: 100px;">
+                                </div>
+
+                                <div class="text-right">
+                                    <input type="submit" value="Answer Submit" class="btn btn-primary btn-style mt-4" style="background-color: #f35b04;">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="map-iframe">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d317718.69319292053!2d-0.3817765050863085!3d51.528307984912544!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47d8a00baf21de75%3A0x52963a5addd52a99!2sLondon%2C+UK!5e0!3m2!1sen!2spl!4v1562654563739!5m2!1sen!2spl"
+                        width="100%" height="400" frameborder="0" style="border: 0px;" allowfullscreen=""></iframe>
+                </div> -->
+
+            </div>
+    </section>
+
+
 
 
 
