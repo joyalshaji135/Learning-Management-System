@@ -3,6 +3,9 @@
 include('./include/connection.php');
 
 ?>
+
+
+
 <!doctype html>
 <html lang="en">
 
@@ -10,7 +13,7 @@ include('./include/connection.php');
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>DigitalEdu an Education Category Bootstrap Responsive Website Template - Courses : W3Layouts</title>
+  <title>LMS</title>
   <!--/google-fonts-->
   <link href="//fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;1,400&display=swap"
     rel="stylesheet">
@@ -62,118 +65,103 @@ include('./include/connection.php');
             </li>
             <li class="nav-item">
               <a class="nav-link" href="./registration.html">Registration</a>
-          </li>
-          <li class="nav-item">
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="./login.html">Login</a>
-          </li>
+            </li>
             <li class="nav-item">
               <a class="nav-link" href="contact.html">Contact</a>
             </li>
           </ul>
         </div>
-        <!-- toggle switch for light and dark theme -->
-
-        <!-- <div class="mobile-position">
-          <nav class="navigation">
-            <div class="theme-switch-wrapper">
-              <label class="theme-switch" for="checkbox">
-                <input type="checkbox" id="checkbox">
-                <div class="mode-container py-1">
-                  <i class="gg-sun"></i>
-                  <i class="gg-moon"></i>
-                </div>
-              </label>
-            </div>
-          </nav>
-        </div> -->
-        <!-- //toggle switch for light and dark theme -->
+        
       </nav>
     </div>
   </header>
   <!--/header-->
   <div class="inner-banner">
-    <section class="w3l-breadcrumb">
+    <section class="w3l-breadcrumb text-left">
       <div class="container">
         <ul class="breadcrumbs-custom-path">
           <li><a href="index.html">Home</a></li>
-          <li class="active"><span class="fa fa-chevron-right mx-2" aria-hidden="true"></span> Courses</li>
+          <?php
+            if (isset($_GET['course_id'])) {
+                $course_id = $_GET['course_id'];
+            
+                $select_course_query = "select * from course_tbl where course_id = $course_id";
+                $course_execute_query = mysqli_query($connection,$select_course_query);
+                while ($course = mysqli_fetch_assoc($course_execute_query)) {
+                    $course_name = $course['course_name'];
+               
+            ?>
+
+          <li class="active"><span class="fa fa-chevron-right mx-2" aria-hidden="true"></span> <?php echo $course_name ?></li>
+          <?php
+           }
+        }
+        ?>
         </ul>
       </div>
     </section>
   </div>
   <!-- about page about section -->
 
-  <!--/courses-->
-  <section class="w3l-blogpost-content w3l-courses py-5">
-    <div class="container py-md-5">
-      <div class="header-title mb-md-5 mb-4">
-        <span class="sub-title">Top Courses</span>
-        <h3 class="hny-title text-left"> Popular Courses</h3>
-      </div>
-      <div class="row">
-        
+<!--//courses-->
+<section class="w3l-bottom-grids-6 py-5" id="features">
+        <div class="container py-lg-5 py-md-4">
+            <div class="grids-area-hny main-cont-wthree-fea row">
 
 
 
-          <?php
-          $select_view_course_query="select * from course_tbl"; 
-           //Change this order by Concept
-          $result_view_course_query=mysqli_query($connection,$select_view_course_query);
-                while($course=mysqli_fetch_assoc($result_view_course_query))
-                {
-                    $course_id = $course['course_id'];
-                    $course_name = $course['course_name'];
-                    $course_description = $course['course_description'];
-                    $course_image = $course['course_image'];
-                    $course_status = $course['course_status'];
+                <?php
+    
+                    if (isset($_GET['course_id'])) {
+                        $course_id = $_GET['course_id'];
+                    
+                        $select_course_level_query = "select * from course_level_tbl where course_id =$course_id";
+                        $course_level_execute_query = mysqli_query($connection,$select_course_level_query);
+                        while ($course_level = mysqli_fetch_assoc($course_level_execute_query)) {
+                            $course_level_id = $course_level['course_level_id'];
+                            $course_level_name = $course_level['course_level_name'];
+                            $course_level_image = $course_level['course_level_image'];
+                        
+                        
+                       
+                
+                ?>
+                <!-- /feature-left-->
+                <div class="col-md-4 grids-feature mt-4">
+                    <div class="area-box">
+                        <div class="row">
+                            <div class="col-sm-4 icon">
+                                <img src="../Admin/Course_Level/<?php echo $course_level_image ?>" alt="" srcset="" style="height: 100px; width: 100px; border-radius: 100px;">
+                            </div>
+                            <div class="col-sm-8 area-box-info">
+                                <h4><a href="#feature" class="title-head"><?php echo $course_level_name ?></a></h4>
+                                <p class="mt-3"></p>
 
-         ?>
-
-
-
-        <div class="col-lg-4 col-md-6 mt-md-0 mt-4">
-          <div class="card">
-            <div class="card-header p-0 position-relative">
-
-              <a href="course_program.php?course_id=<?php echo $course_id ?>">
-                <img class="card-img-bottom d-block radius-image-full" src="../Admin/Course_Image/<?php echo $course_image ?>" alt="Card image cap" style="height: 200px
-                ;">
-              </a>
-            </div>
-            <div class="card-body blog-details">
-              <p class="price-review"><?php echo $course_name ?></p>
-              <a href="course_program.php?course_id=<?php echo $course_id ?>" class="blog-desc mt-2"><?php echo $course_description ?>
-              </a>
-              <div class="course-meta mt-1">
-                <div class="meta-item course-lesson">
-                  <span class="fa "></span>
-                  <span class="meta-value" style="color: green;"> Active </span>
+                                <a class="btn btn-primary btn-style mt-4" href="./filling_in_the_blanks.php?filling_in_the_blanks_id=">Exe Class <span class="fa fa-chevron-right ml-2" aria-hidden="true"></span></a>
+                                <a class="btn btn-primary btn-style mt-4" href="./vedio_class.php?video_id=">Video Class <span class="fa fa-chevron-right ml-2" aria-hidden="true"></span></a>
+                                <a class="btn btn-primary btn-style mt-4" href="./quiz_class.php?quiz_id=">Quiz Class <span class="fa fa-chevron-right ml-2" aria-hidden="true"></span></a>
+                                
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="meta-item course-students">
-                  <span class=""></span>
-                  <a href="course_program.php?course_id=<?php echo $course_id ?>">
-                  <span class="meta-value"> Click Here </span>
-                  </a>
-                </div>
-              </div>
+                <?php
+                    }
+                }
+                ?>
+                
             </div>
-          </div>
         </div>
-<?php
+    </section>
+    <!-- //bottom-grids-->
 
-            }
-?>
+  <!-- about page about section -->
 
-      </div>
-      <div class="course-button mt-lg-4 text-center">
-      <a href="contact.html" class="btn btn-style btn-primary pt-lg-3 mt-sm-5 mt-4">Start Today <span
-          class="fa fa-chevron-right ml-2" aria-hidden="true"></span></a>
-        </div>
-    </div>
-  </section>
-  <!--//courses-->
-  <!-- footer -->
-  <section class="w3l-footer-29-main">
+    <!-- footer -->
+    <section class="w3l-footer-29-main">
     <div class="footer-29 py-5">
       <div class="container py-lg-4">
         <div class="row footer-top-29">

@@ -1,8 +1,3 @@
-<?php
-
-include('./include/connection.php');
-
-?>
 <!doctype html>
 <html lang="en">
 
@@ -10,7 +5,7 @@ include('./include/connection.php');
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>DigitalEdu an Education Category Bootstrap Responsive Website Template - Courses : W3Layouts</title>
+  <title>DigitalEdu an Education Category Bootstrap Responsive Website Template - About : W3Layouts</title>
   <!--/google-fonts-->
   <link href="//fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;1,400&display=swap"
     rel="stylesheet">
@@ -54,18 +49,18 @@ include('./include/connection.php');
             <li class="nav-item">
               <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item active">
               <a class="nav-link" href="about.html">About</a>
             </li>
-            <li class="nav-item active">
+            <li class="nav-item">
               <a class="nav-link" href="services.html">Courses</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="./registration.html">Registration</a>
-          </li>
-          <li class="nav-item">
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="./login.html">Login</a>
-          </li>
+            </li>
             <li class="nav-item">
               <a class="nav-link" href="contact.html">Contact</a>
             </li>
@@ -92,86 +87,35 @@ include('./include/connection.php');
   </header>
   <!--/header-->
   <div class="inner-banner">
-    <section class="w3l-breadcrumb">
+    <section class="w3l-breadcrumb text-left">
       <div class="container">
         <ul class="breadcrumbs-custom-path">
           <li><a href="index.html">Home</a></li>
-          <li class="active"><span class="fa fa-chevron-right mx-2" aria-hidden="true"></span> Courses</li>
+          <li class="active"><span class="fa fa-chevron-right mx-2" aria-hidden="true"></span> About Us</li>
         </ul>
       </div>
     </section>
   </div>
   <!-- about page about section -->
 
-  <!--/courses-->
-  <section class="w3l-blogpost-content w3l-courses py-5">
-    <div class="container py-md-5">
-      <div class="header-title mb-md-5 mb-4">
-        <span class="sub-title">Top Courses</span>
-        <h3 class="hny-title text-left"> Popular Courses</h3>
-      </div>
-      <div class="row">
-        
 
 
 
-          <?php
-          $select_view_course_query="select * from course_tbl"; 
-           //Change this order by Concept
-          $result_view_course_query=mysqli_query($connection,$select_view_course_query);
-                while($course=mysqli_fetch_assoc($result_view_course_query))
-                {
-                    $course_id = $course['course_id'];
-                    $course_name = $course['course_name'];
-                    $course_description = $course['course_description'];
-                    $course_image = $course['course_image'];
-                    $course_status = $course['course_status'];
-
-         ?>
 
 
 
-        <div class="col-lg-4 col-md-6 mt-md-0 mt-4">
-          <div class="card">
-            <div class="card-header p-0 position-relative">
 
-              <a href="course_program.php?course_id=<?php echo $course_id ?>">
-                <img class="card-img-bottom d-block radius-image-full" src="../Admin/Course_Image/<?php echo $course_image ?>" alt="Card image cap" style="height: 200px
-                ;">
-              </a>
-            </div>
-            <div class="card-body blog-details">
-              <p class="price-review"><?php echo $course_name ?></p>
-              <a href="course_program.php?course_id=<?php echo $course_id ?>" class="blog-desc mt-2"><?php echo $course_description ?>
-              </a>
-              <div class="course-meta mt-1">
-                <div class="meta-item course-lesson">
-                  <span class="fa "></span>
-                  <span class="meta-value" style="color: green;"> Active </span>
-                </div>
-                <div class="meta-item course-students">
-                  <span class=""></span>
-                  <a href="course_program.php?course_id=<?php echo $course_id ?>">
-                  <span class="meta-value"> Click Here </span>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-<?php
 
-            }
-?>
 
-      </div>
-      <div class="course-button mt-lg-4 text-center">
-      <a href="contact.html" class="btn btn-style btn-primary pt-lg-3 mt-sm-5 mt-4">Start Today <span
-          class="fa fa-chevron-right ml-2" aria-hidden="true"></span></a>
-        </div>
-    </div>
-  </section>
-  <!--//courses-->
+
+
+
+
+
+
+
+
+
   <!-- footer -->
   <section class="w3l-footer-29-main">
     <div class="footer-29 py-5">
@@ -320,3 +264,9 @@ include('./include/connection.php');
 </body>
 
 </html>
+
+
+
+
+
+
