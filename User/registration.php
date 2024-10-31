@@ -1,3 +1,11 @@
+<?php
+
+include('./include/connection.php');
+
+include('./Function/common_function.php');
+
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -144,46 +152,48 @@
                         <div class="contactct-fm map-content-9 pl-lg-4">
                             <div class="contactct-fm-text text-left">
                                 <div class="header-title mb-md-5 mt-4">
-                                    <span class="sub-title">Login</span>
-                                    <h3 class="hny-title text-left">User Login</h3>
+                                    <span class="sub-title">Registration</span>
+                                    <h3 class="hny-title text-left">Client Registration</h3>
                                 </div>
                                 <p class="mb-sm-5 mb-4">
 
                                 </p>
                             </div>
-                            <form action="#" method="post">
+                            <form action="" method="post" enctype="multipart/form-data">
                                 <div class="twice-two">
-                                    <input type="text" class="form-control" name="w3lName" id="w3lName"
+                                    <!-- client_first_name 	client_last_name 	client_username 	client_email 	client_phone_number 	
+                                     client_password 	client_photo 	client_address 	client_status 	 -->
+                                    <input type="text" class="form-control" name="client_first_name" id="w3lName"
                                         placeholder="First Name" required="">
-                                    <input type="text" class="form-control" name="w3lSender" id="w3lSender"
+                                    <input type="text" class="form-control" name="client_last_name" id="w3lSender"
                                         placeholder="Last Name" required="">
                                 </div>
                                 <div class="twice">
-                                    <input type="text" class="form-control" name="w3lSubject" id="w3lSubject"
+                                    <input type="text" class="form-control" name="client_username" id="w3lSubject"
                                         placeholder="Username" required="">
                                 </div>
                                 <div class="twice">
-                                    <input type="email" class="form-control" name="w3lSubject" id="w3lSubject"
+                                    <input type="email" class="form-control" name="client_email" id="w3lSubject"
                                         placeholder="Email" required="">
                                 </div>
                                 <div class="twice">
-                                    <input type="text" class="form-control" name="w3lSubject" id="w3lSubject"
+                                    <input type="text" class="form-control" name="client_phone_number" id="w3lSubject"
                                         placeholder="Phone Number" required="">
                                 </div>
                                 <div class="twice-two">
-                                    <input type="password" class="form-control" name="w3lName" id="w3lName"
+                                    <input type="password" class="form-control" name="client_password" id="w3lName"
                                         placeholder="Password" required="">
-                                    <input type="password" class="form-control" name="w3lSender" id="w3lSender"
+                                    <input type="password" class="form-control" name="client_confirm_password" id="w3lSender"
                                         placeholder="Confirm Password" required="">
                                 </div>
                                 <div class="twice">
-                                    <input type="file" class="form-control" name="w3lSubject" id="w3lSubject"
+                                    <input type="file" class="form-control" name="client_photo" id="w3lSubject"
                                         placeholder="" required="">
                                 </div>
-                                <textarea name="w3lMessage" class="form-control" id="w3lMessage" placeholder="Address"
+                                <textarea name="client_address" class="form-control" id="w3lMessage" placeholder="Address"
                                     required=""></textarea>
                                 <div class="text-right">
-                                    <input type="submit" value="Registration" class="btn btn-primary btn-style mt-4" style="background-color: #f35b04;">
+                                    <input type="submit" name="client_registration" value="Registration" class="btn btn-primary btn-style mt-4" style="background-color: #f35b04;">
                                 </div>
                             </form>
                         </div>
@@ -201,5 +211,50 @@
 <?php
 
 include('./Layouts/footer.php');
+
+?>
+
+
+<?php
+if (isset($_POST['client_registration'])) {
+    //  client_first_name 	client_last_name 	client_username 	client_email 	client_phone_number 	
+    //  client_password 	client_photo 	client_address  client_ip_address 	client_status 	 
+
+    $client_first_name = $_POST['client_first_name'];
+    $client_last_name = $_POST['client_last_name']; 
+    $client_username = $_POST['client_username'];
+    $client_email = $_POST['client_email'];
+    $client_phone_number = $_POST['client_phone_number'];
+    $client_password = $_POST['client_password'];
+    $client_hash_password = password_hash($client_password, PASSWORD_DEFAULT);
+    $client_confirm_password = $_POST['client_confirm_password'];
+    $client_address = $_POST['client_address'];
+    $client_ip_address = getIPAddress();
+    $client_status = "active";
+
+    // Image Accessing
+    $client_photo = $_FILES['client_photo']['name'];
+	$client_temp_image = $_FILES['client_photo']['tmp_name'];
+
+    //Select Existing Client Query
+	$select_already_exist_clients_check_query = "select * from client_registration_tbl where 
+    client_username='$client_username' or client_email='$client_email' or client_phone_number='$client_phone_number'";
+
+    $already_exist_clients_check_execute_query = mysqli_query($connection, $select_already_exist_clients_check_query);
+    $number_of_already_existing_clients = mysqli_num_rows($already_exist_clients_check_execute_query);
+
+    if ($number_of_already_existing_clients > 0) 
+    {
+        echo "<script>alert('Username,Email and Phone Number are Already Exist')</script>";
+    }
+    else
+    {
+        move_uploaded_file($client_temp_image, "./Client_Image/$client_photo");
+		$insert_query = "insert into `user_registration` 
+                    (username,user_email,user_password,user_image,user_ip_address,user_address,user_phone_number) 
+                    values ('$username','$user_email','$hash_password','$user_image','$user_ip_address','$user_address','$user_phone_number')";
+		$sql_execute = mysqli_query($con, $insert_query);
+    }
+}
 
 ?>

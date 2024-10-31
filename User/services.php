@@ -105,7 +105,7 @@ include('./include/connection.php');
   <!-- about page about section -->
 
   <!--/courses-->
-  <section class="w3l-blogpost-content w3l-courses py-5">
+  <section class="w3l-blogpost-content w3l-courses py-5" style="background-color: rgb(5, 11, 22)";>
     <div class="container py-md-5">
       <div class="header-title mb-md-5 mb-4">
         <span class="sub-title">Top Courses</span>

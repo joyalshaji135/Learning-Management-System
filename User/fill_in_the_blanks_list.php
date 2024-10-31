@@ -110,7 +110,7 @@ include('./include/connection.php');
   <!-- about page about section -->
 
 
-  <section class="w3l-bottom-grids-6 py-5" id="features">
+  <section class="w3l-bottom-grids-6 py-5" id="features" style="background-color: rgb(5, 11, 22)";>
         <div class="container py-lg-5 py-md-4">
             <div class="grids-area-hny main-cont-wthree-fea row">
                 <!-- /feature-left-->
