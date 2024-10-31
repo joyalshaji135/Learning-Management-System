@@ -250,10 +250,13 @@ if (isset($_POST['client_registration'])) {
     else
     {
         move_uploaded_file($client_temp_image, "./Client_Image/$client_photo");
-		$insert_query = "insert into `user_registration` 
-                    (username,user_email,user_password,user_image,user_ip_address,user_address,user_phone_number) 
-                    values ('$username','$user_email','$hash_password','$user_image','$user_ip_address','$user_address','$user_phone_number')";
-		$sql_execute = mysqli_query($con, $insert_query);
+		$insert_client_registration_query = "insert into `client_registration_tbl` 
+                    (client_first_name,client_last_name,client_username,client_email,client_phone_number,client_password,client_photo,client_address,client_ip_address,client_status) 
+                    values ('$client_first_name','$client_last_name','$client_username','$client_email','$client_phone_number','$client_hash_password','$client_photo','$client_address','$client_ip_address','$client_status')";
+		$client_registration_execute_query = mysqli_query($connection, $insert_client_registration_query);
+        if ($client_registration_execute_query) {
+            echo "Registration Successfully";
+        }
     }
 }
 
