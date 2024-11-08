@@ -1,7 +1,5 @@
 <?php
 
-include('./include/connection.php');
-
 include('./Function/common_function.php');
 
 ?>
@@ -255,7 +253,12 @@ if (isset($_POST['client_registration'])) {
                     values ('$client_first_name','$client_last_name','$client_username','$client_email','$client_phone_number','$client_hash_password','$client_photo','$client_address','$client_ip_address','$client_status')";
 		$client_registration_execute_query = mysqli_query($connection, $insert_client_registration_query);
         if ($client_registration_execute_query) {
-            echo "Registration Successfully";
+            echo "<script>alert('Registration Successfully')</script>";
+            echo "<script>window.open('./login.php','_self')</script>";
+        }
+        else
+        {
+            die(mysqli_error($connection));
         }
     }
 }
