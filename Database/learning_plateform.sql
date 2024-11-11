@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 01, 2024 at 03:16 AM
+-- Generation Time: Nov 08, 2024 at 07:25 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -40,6 +40,14 @@ CREATE TABLE `client_registration_tbl` (
   `client_ip_address` varchar(255) NOT NULL,
   `client_status` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `client_registration_tbl`
+--
+
+INSERT INTO `client_registration_tbl` (`client_id`, `client_first_name`, `client_last_name`, `client_username`, `client_email`, `client_phone_number`, `client_password`, `client_photo`, `client_address`, `client_ip_address`, `client_status`) VALUES
+(1, 'as', 'as', 'as', 'as@gmail.com', '1234567890', '$2y$10$qxCCvaxfUT8QLvn/qzvf5.Ox.893g3Zyk8ATEMwW5SmZKF2hh7Wm2', 'German.jpg', 'ssdasd', '127.0.0.1', 'active'),
+(2, 'asd', 'asd', 'asd', 'asd@gmail.com', '903980912809', '$2y$10$3pvY02Byuu7vhJ42Yljl..KuCGK9b1HlX5pj0ojg7.f7/arER0H8m', 'Usecase Diagram.drawio(3).png', 'asdad', '127.0.0.1', 'active');
 
 -- --------------------------------------------------------
 
@@ -215,7 +223,7 @@ ALTER TABLE `video_class_tbl`
 -- AUTO_INCREMENT for table `client_registration_tbl`
 --
 ALTER TABLE `client_registration_tbl`
-  MODIFY `client_id` int(100) NOT NULL AUTO_INCREMENT;
+  MODIFY `client_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `course_level_tbl`

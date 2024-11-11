@@ -90,7 +90,7 @@ include('./Layouts/sidebar.php');
                                 <td><img src="./Course_Level/<?php echo $course_level_image ?>" alt="" srcset="" style="height: 100px; width: 100px; "></td>
                                 <td><a href="./view_course_level.php"><input type="button" value="View" class="button1"></td>
                                 <td><a href="./update_course_level.php?update_course_level_id=<?php echo $course_level_id ?>"><input type="button" value="Update" class="button3"></a></td>
-                                <td><a href="./delete_course_level.php?delete_course_level_id=<?php echo $course_level_id ?>"><input type="button" value="Delete" class="button2"></a></td>
+                                <td><input type="button" value="Delete" class="button2" id="delete_btn"></td>
                                
 										<?php
 											if ($course_level_status == "active") 
@@ -116,6 +116,21 @@ include('./Layouts/sidebar.php');
             </div>
         </div>
     </section>
+<!-- <script>
+	$(document).ready(function(){
+    $("#delete_btn").click(function(){
+        var delete_id=$(this).val();
+        $.ajax({
+            url:"",
+            method:"POST",
+            data:{delete_ID:delete_id},
+            success:function(){
+                alert("Deleted Successfully");
+            }
+        }); 
+    });
+});
+</script> -->
  <!-- footer -->
 <?php
 

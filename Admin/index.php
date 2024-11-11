@@ -33,11 +33,18 @@ include('./Layouts/sidebar.php');
 			<div class="col-md-4 market-update-gd">
 				<div class="market-update-block clr-block-2">
 					<div class="col-md-4 market-update-right">
-						<i class="fa fa-users"> </i>
+						<i class="fa fa-user" style="font-size: 3em; color:#fff; text-align: left;"> </i>
 					</div>
 					 <div class="col-md-8 market-update-left">
 					 <h4>Users</h4>
-					<h3>0</h3>
+
+
+					<?php
+					 	$select_users_query = "select * from client_registration_tbl";
+						$execute_users_query = mysqli_query($connection,$select_users_query);
+						$users_count_row = mysqli_num_rows($execute_users_query);
+					?>
+					<h3><?php echo $users_count_row ?></h3>
 					<p>Total Users</p>
 				  </div>
 				  <div class="clearfix"> </div>
@@ -46,11 +53,18 @@ include('./Layouts/sidebar.php');
 			<div class="col-md-4 market-update-gd">
 				<div class="market-update-block clr-block-1">
 					<div class="col-md-4 market-update-right">
-						<i class="fa fa-users" ></i>
+						<i class="fa fa-graduation-cap" style="font-size: 3em; color:#fff; text-align: left;"></i>
 					</div>
 					<div class="col-md-8 market-update-left">
 					<h4>Courses</h4>
-						<h3>0</h3>
+
+
+					<?php
+					 	$select_course_query = "select * from course_tbl";
+						$execute_course_query = mysqli_query($connection,$select_course_query);
+						$course_count_row = mysqli_num_rows($execute_course_query);
+					?>
+						<h3><?php echo $course_count_row ?></h3>
 						<p>Total Courses</p>
 					</div>
 				  <div class="clearfix"> </div>
@@ -59,11 +73,74 @@ include('./Layouts/sidebar.php');
 			<div class="col-md-4 market-update-gd">
 				<div class="market-update-block clr-block-3">
 					<div class="col-md-4 market-update-right">
-						<i class="fa fa-usd"></i>
+						<i class="fa fa-commenting" style="font-size: 3em; color:#fff; text-align: left;"></i>
 					</div>
 					<div class="col-md-8 market-update-left">
 						<h4>Feedbacks</h4>
 						<h3>0</h3>
+						<p>Total Feedbacks</p>
+					</div>
+				  <div class="clearfix"> </div>
+				</div>
+			</div>
+		   <div class="clearfix"> </div>
+		</div>
+
+
+		<div class="market-updates">
+			<div class="col-md-4 market-update-gd">
+				<div class="market-update-block clr-block-2">
+					<div class="col-md-4 market-update-right">
+						<i class="fa fa-video-camera" style="font-size: 3em; color:#fff; text-align: left;"> </i>
+					</div>
+					 <div class="col-md-8 market-update-left">
+					 <h4>Video Class</h4>
+
+
+					<?php
+					 	$select_video_class_query = "select * from video_class_tbl";
+						$execute_video_class_query = mysqli_query($connection,$select_video_class_query);
+						$video_class_count_row = mysqli_num_rows($execute_video_class_query);
+					?>
+					<h3><?php echo $video_class_count_row ?></h3>
+					<p>Total Users</p>
+				  </div>
+				  <div class="clearfix"> </div>
+				</div>
+			</div>
+			<div class="col-md-4 market-update-gd">
+				<div class="market-update-block clr-block-1">
+					<div class="col-md-4 market-update-right">
+						<i class="fa fa-question-circle" style="font-size: 3em; color:#fff; text-align: left;"></i>
+					</div>
+					<div class="col-md-8 market-update-left">
+					<h4>Quiz Class</h4>
+
+
+					<?php
+					 	$select_quiz_class_query = "select * from quiz_class_tbl";
+						$execute_quiz_class_query = mysqli_query($connection,$select_quiz_class_query);
+						$quiz_class_count_row = mysqli_num_rows($execute_quiz_class_query);
+					?>
+						<h3><?php echo $quiz_class_count_row ?></h3>
+						<p>Total Courses</p>
+					</div>
+				  <div class="clearfix"> </div>
+				</div>
+			</div>
+			<div class="col-md-4 market-update-gd">
+				<div class="market-update-block clr-block-3">
+					<div class="col-md-4 market-update-right">
+						<i class="fa fa-question-circle" style="font-size: 3em; color:#fff; text-align: left;"></i>
+					</div>
+					<div class="col-md-8 market-update-left">
+						<h4>Fill in the Blanks</h4>
+						<?php
+					 	$select_fitb_query = "select * from filling_in_the_blanks_tbl";
+						$execute_fitb_query = mysqli_query($connection,$select_fitb_query);
+						$fitb_count_row = mysqli_num_rows($execute_fitb_query);
+						?>
+						<h3><?php echo $fitb_count_row ?></h3>
 						<p>Total Feedbacks</p>
 					</div>
 				  <div class="clearfix"> </div>
