@@ -39,8 +39,7 @@ include('./Layouts/sidebar.php');
                                 <th style="text-align: center;">View</th>
                                 <th style="text-align: center;">Update</th>
                                 <th style="text-align: center;">Delete</th>
-                                <th style="text-align: center;">Activate</th>
-                                <th style="text-align: center;">Deactivate</th>
+                                <th style="text-align: center;">Status</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -52,7 +51,6 @@ include('./Layouts/sidebar.php');
                                 <td><input type="button" value="Update" class="button3"></td>
                                 <td><input type="button" value="Delete" class="button2"></td>
                                 <td><input type="button" value="Activate" class="button3"></td>
-                                <td><input type="button" value="Deactivate" class="button2"></td>
                             </tr>                            
                         </tbody>
                     </table>
