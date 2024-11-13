@@ -26,7 +26,7 @@ include('./Layouts/sidebar.php');
 ?>
 <!-- Programme and Course are Organize -->
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 <script type="text/javascript">
    $(document).ready(function(){
     $("#course").change(function(){
@@ -56,64 +56,60 @@ include('./Layouts/sidebar.php');
                         <div data-collapsed="0" class="pane">
                             <div class="panel-heading">
                                 <div class="panel-title">
-                                    <u><b>Add Fill in the Blanks</b></u>
+                                    <u><b>Add Video Class</b></u>
                                 </div>
                             </div>
                             <div class="panel-body">
                                 <div class="row">
-                                    <form action="" method="post">
+                                    <form action="" method="post" enctype="multipart/form-data">
                                         <div class="form-group">
-<!-- 
-										fitb_id 	course_id 	course_level_id 	
-										fitb_title 	fitb_description 	first_sentence 	
-										last_sentence 	option_a 	option_b 	option_c 	option_d 	
-										answer_key 	filb_status 
-										-->
 
-                                        <?php
+										<!-- course_id 	course_level_id 	 	video_class_title 	video_class_description 	
+										 video_class_videos 	video_class_url 	video_class_status -->
 
-                                        if(isset($_GET['update_fitb_id'])){
+                                         <!-- Update Video Class -->
 
-                                            $update_fitb_id = $_GET['update_fitb_id'];
-                                            $select_fitb_class_query = "select * from filling_in_the_blanks_tbl where fitb_id = $update_fitb_id";
-                                            $execute_update_fitb_class_query = mysqli_query($connection,$select_fitb_class_query);
-                                            while($fitb_class_rows = mysqli_fetch_assoc($execute_update_fitb_class_query)){
-                                                $fitb_id = $fitb_class_rows['fitb_id'];
-                                                $course_id = $fitb_class_rows['course_id'];
-                                                $course_level_id = $fitb_class_rows['course_level_id'];
-                                                $fitb_title = $fitb_class_rows['fitb_title'];
-                                                $fitb_description = $fitb_class_rows['fitb_description'];
-                                                $first_sentence = $fitb_class_rows['first_sentence'];
-                                                $last_sentence = $fitb_class_rows['last_sentence'];
-                                                $option_a = $fitb_class_rows['option_a'];
-                                                $option_b = $fitb_class_rows['option_b'];
-                                                $option_c = $fitb_class_rows['option_c'];
-                                                $option_d = $fitb_class_rows['option_d'];
-                                                $answer_key = $fitb_class_rows['answer_key'];
-                                                $fitb_status = $fitb_class_rows['filb_status'];
-                                                
+                                         <?php
+
+                                         if (isset($_GET['update_video_id'])) {
+                                            
+                                            $update_video_class_id = $_GET['update_video_id'];
+                                            $select_video_class_query = "select * from video_class_tbl where video_class_id = $update_video_class_id";
+                                            $video_class_execute_query = mysqli_query($connection,$select_video_class_query);
+                                            while ($video_class_rows = mysqli_fetch_assoc($video_class_execute_query)) {
+                                                $course_id = $video_class_rows['course_id'];
+                                                $course_level_id = $video_class_rows['course_level_id'];
+                                                $video_class_title = $video_class_rows['video_class_title'];
+                                                $video_class_description = $video_class_rows['video_class_description'];
+                                                $video_thumbnail = $video_class_rows['video_thumbnail'];
+                                                $video_class_videos = $video_class_rows['video_class_videos'];
+                                                $video_class_url = $video_class_rows['video_class_url'];
+                                                $video_class_status = $video_class_rows['video_class_status'];
                                             }
+                                            
                                         }
-                                        ?>
-											<div class="col-md-6 form-group">
+                                         ?>
+                                            <div class="col-md-6 form-group">
                                         	    <label for="exampleInputEmail1">Title Name:*</label>
-                                        	    <input type="text" placeholder=".col-md-3" class="form-control" name="fitb_title" autocomplete="off" required="required" value="<?php echo $fitb_title; ?>">
+                                        	    <input type="text" placeholder=".col-md-3" class="form-control" name="video_class_title" autocomplete="off" required="required" value="<?php echo $video_class_title ?>">
                                         	</div>
 
 											<div class="col-md-6 form-group">
                                         	    <label for="exampleInputEmail1">Description:*</label>
-                                        	    <input type="text" placeholder=".col-md-3" class="form-control" name="fitb_description" autocomplete="off" required="required" value="<?php echo $fitb_description; ?>">
+                                        	    <input type="text" placeholder=".col-md-3" class="form-control" name="video_class_description" autocomplete="off" required="required" value="<?php echo $video_class_description ?>">
                                         	</div>
 
                                             <div class="col-sm-6">
 											<label for="Title">Select Course:*</label>
 												<select id="course" class="form-control m-bot15" name="course_id" style="text-align: center;">
+                                            			<option selected disabled>Select Course</option>
+	
                                             	    			     <!--PHP Connection Start in Course-->
                                             	    			     <!-- Function Course -->
 
 
 																	 <!-- Course_Function() -->
-                                            	    			 <?php
+                                                                <?php
                                             	    			 $select_course_query = "select * from course_tbl where course_id =  $course_id";
                                             	    			 $select_course_execute = mysqli_query($connection,$select_course_query);
                                             	    			 while($course_row=mysqli_fetch_assoc($select_course_execute))
@@ -141,12 +137,7 @@ include('./Layouts/sidebar.php');
 											<div class="col-md-6 form-group">
                                                     <label for="exampleInputEmail1">Select Course Level :*</label>
                                                     <select id="course_level" class="form-control m-bot15" style="text-align: center;" name="course_level_id" autocomplete="off" required="required">
-	
-															<!--PHP Connection Start in Course-->
-															<!-- Function Course -->											
-
-															<!-- Course_Function() -->
-														<?php
+                                                    <?php
 														$select_course_level_query = "select * from course_level_tbl where course_level_id =  $course_level_id";
 														$select_course_level_execute = mysqli_query($connection,$select_course_level_query);
 														while($course_level_row=mysqli_fetch_assoc($select_course_level_execute))
@@ -156,73 +147,57 @@ include('./Layouts/sidebar.php');
 														   	echo "<option value='$course_level_id' selected disabled style='background-color: green;'>$course_level_name</option>";
 														}
 
-														?>  
-														
-                                                        
+														?> 
                                                     </select>
                                             </div>
-
-											<div class="col-md-4 form-group">
-                                                    <label for="exampleInputEmail1"> Fill in the Blanks First Sentence:*</label>
-													<input type="text" placeholder=".col-md-6" class="form-control" name="first_sentence" autocomplete="off" required="required" value="<?php echo $first_sentence; ?>">
-                                            </div>
-											
-											<div class="col-md-4 form-group">
-                                                    
-                                            </div>
-											
-											<div class="col-md-4 form-group">
-                                                    <label for="exampleInputEmail1"> Fill in the Blanks Last Sentence:*</label>
-													<input type="text" placeholder=".col-md-6" class="form-control" name="last_sentence" autocomplete="off" required="required" value="<?php echo $last_sentence; ?>">
-                                            </div>
-
-											<div class="col-md-6 form-group">
-                                                    <label for="exampleInputEmail1"> Option A:*</label>
-													<input type="text" placeholder=".col-md-6"  class="form-control" name="option_a" autocomplete="off" required="required" value="<?php echo $option_a; ?>">
-                                            </div>
-
-											<div class="col-md-6 form-group">
-                                                    <label for="exampleInputEmail1"> Option B:*</label>
-													<input type="text" placeholder=".col-md-6" class="form-control" name="option_b" autocomplete="off" required="required" value="<?php echo $option_b; ?>">
-                                            </div>
 											
 											<div class="col-md-6 form-group">
-                                                    <label for="exampleInputEmail1"> Option C:*</label>
-													<input type="text" placeholder=".col-md-6" class="form-control" name="option_c" autocomplete="off" required="required" value="<?php echo $option_c; ?>">
-                                            </div>
-
+												<center>
+													<label for="exampleInputEmail1">Video Class Thumbnail:*</label>
+                                                    <br>
+													<img src="./Video_Thumbnail/<?php echo $video_thumbnail ?>" alt="" style="height: 100px; width: 100px;">
+													<input type="file" name="video_thumbnail" id="" autocomplete="off" required="required">
+													</center>
+											</div>
 											<div class="col-md-6 form-group">
-                                                    <label for="exampleInputEmail1"> Option D:*</label>
-													<input type="text" placeholder=".col-md-6" class="form-control" name="option_d" autocomplete="off" required="required" value="<?php echo $option_d; ?>">
-                                            </div>
+												<center>
+													<label for="exampleInputEmail1">Video Class:*</label>
+                                                    <br>
+													<video src="./Video_Class/<?php echo $video_class_videos ?>" style="height: 100px; width: 100px;"></video>
+													<input type="file" name="video_class_videos" id="" autocomplete="off" required="required">
+													</center>
+											</div>
+
+											<div class="col-md-12 form-group">
+												<center>
+													<label for="exampleInputEmail1">OR</label>
+													</center>
+											</div>
 											
 											<div class="col-md-3 form-group"></div>
-											<div class="col-md-6 form-group">
-                                                    <label for="exampleInputEmail1"> Answer Key:*</label>
-													<select id="" class="form-control m-bot15" name="answer_key" style="text-align: center;">
-                                            			<option value="<?php echo $answer_key ?>" selected disabled><?php echo $answer_key ?></option>
-														<option value="option_a">Option A</option>
-														<option value="option_b">Option B</option>
-														<option value="option_c">Option C</option>
-														<option value="option_d">Option D</option>
-													</select>
-                                            </div>
-											<div class="col-md-3 form-group"></div>
 
-											<div class="col-md-4 form-group"></div>
+											<div class="col-md-6 form-group">
+											<label for="exampleInputEmail1">Link:*</label>
+											<input type="text" placeholder=".col-md-3" class="form-control" name="video_class_url" autocomplete="off" value="<?php echo $video_class_url ?>">
+											</div>
+
+											<div class="col-md-3 form-group"></div>
+                                            
+                                            <div class="col-md-4 form-group"></div>
 											<div class="col-md-4 form-group">
                                                     <label for="exampleInputEmail1"> Status:*</label>
-													<select id="" class="form-control m-bot15" name="fitb_status" style="text-align: center;">
-                                            			<option value="<?php echo $fitb_status ?>" selected disabled><?php echo $fitb_status ?></option>
+													<select id="" class="form-control m-bot15" name="video_class_status" style="text-align: center;">
+                                            			<option value="<?php echo $fitb_status ?>" selected disabled><?php echo $video_class_status ?></option>
 														<option value="active">Active</option>
 														<option value="inactive">Inactive</option>
 													</select>
                                             </div>
 											<div class="col-md-4 form-group"></div>
-											
+
+
 											<div class="col-md-12">
 												<center>
-                                            		<input type="submit" value="Updated	" class="btn btn-info" name="insert_fitb">
+                                            		<input type="submit" value="Updated" class="btn btn-info" name="update_video_class">
 												</center>
 											</div>					 
                                         
@@ -350,46 +325,62 @@ include('./Layouts/footer.php');
 
 <?php
 
-    if (isset($_POST['insert_fitb'])) {
+if (isset($_POST['update_video_class'])) {
+
+	// course_id 	course_level_id 	video_class_title 	video_class_description 	
+	// video_class_videos 	video_class_url 	video_class_status
+
+	$course_id = $_POST['course_id'];
+	$course_level_id = $_POST['course_level_id'];
+	$video_class_title = $_POST['video_class_title'];
+	$video_class_description = $_POST['video_class_description'];
+	$video_class_url = $_POST['video_class_url'];
+	$video_class_status = $_POST['video_class_status'];
+
+       //Video Accessing 
+
+	   $video_class_videos=$_FILES['video_class_videos']['name'];
+
+	   //Video Accessing for tmp Image
+
+	   $temp_image=$_FILES['video_class_videos']['tmp_name'];
+
+	   //Video Thumbnail Accessing 
+
+	   $video_thumbnail=$_FILES['video_thumbnail']['name'];
+
+	   //Video Thumbnail Accessing for tmp Image
+
+	   $temp_thumbnail=$_FILES['video_thumbnail']['tmp_name'];
+
+	
+
+	if ($course_id == '' or $course_level_id == '' or $video_class_title == '' or $video_class_description == '' or $video_class_videos == '' or $video_class_status == '' or $video_thumbnail =='' or $video_class_url =='') 
+	{
+		echo "<script>alert('Please Fill the Blank Spaces')</script>";
+		exit;
+	} 
+	else 
+	{
+		move_uploaded_file($temp_image,"./Video_Class/$video_class_videos");
+
+		move_uploaded_file($temp_thumbnail,"./Video_Thumbnail/$video_thumbnail");
 
 
-		$course_id = $_POST['course_id'];
-		$course_level_id = $_POST['course_level_id'];
-        $fitb_title =  $_POST['fitb_title'];
-		$fitb_description = $_POST['fitb_description'];
-		$first_sentence =  $_POST['first_sentence'];
-		$last_sentence = $_POST['last_sentence'];
-		$option_a = $_POST['option_a'];
-		$option_b = $_POST['option_b'];
-		$option_c = $_POST['option_c'];
-		$option_d = $_POST['option_d'];
-		$answer_key =  $_POST['answer_key'];
-		$fitb_status = $_POST['fitb_status'];
+		$update_video_class_query="update video_class_tbl set course_id='$course_id',course_level_id='$course_level_id',video_class_title='$video_class_title',
+        video_class_description='$video_class_description',video_thumbnail='$video_thumbnail',video_class_videos='$video_class_videos',
+        video_class_url='$video_class_url',video_class_status='$video_class_status' where video_class_id=$update_video_class_id";
+		$update_video_class_execute_query=mysqli_query($connection,$update_video_class_query);
+		if($update_video_class_execute_query)
+		{
+		  echo "<script>alert('Video Updated Successfully')</script>";
+		  echo "<script>window.open('view_video_class.php','_self')</script>";
+		}
+		else
+		{
+			die(mysqli_error($connection));
+		}
+	}
+}
 
-
-        if ($course_id == '' or $course_level_id == '' or $fitb_title == '' or $fitb_description == '' or $first_sentence == '' or 
-		$last_sentence == '' or $option_a == '' or $option_b == '' or $option_c == '' or $option_d == '' or $answer_key == '') 
-        {
-            echo "<script>alert('Please Fill the Blank Spaces')</script>";
-            exit;
-        } 
-        else 
-        {
-
-            $update_fitb_query = "update filling_in_the_blanks_tbl set course_id='$course_id',course_level_id='$course_level_id',fitb_title='$fitb_title',
-			fitb_description='$fitb_description',first_sentence='$first_sentence',last_sentence='$last_sentence',option_a='$option_a',
-			option_b='$option_b',option_c='$option_c',option_d='$option_d',answer_key='$answer_key',filb_status='$fitb_status' where fitb_id = $update_fitb_id";
-            $update_fitb_execute_query=mysqli_query($connection,$update_fitb_query);
-            if($update_fitb_execute_query)
-            {
-              echo "<script>alert('Updated Fill in the Blanks Successfully')</script>";
-              echo "<script>window.open('./view_fitb.php','_self')</script>";
-            }
-            else
-            {
-                die(mysqli_error($connection));
-            }
-        }
-    }
-
-    ?>
+?>

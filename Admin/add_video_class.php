@@ -300,7 +300,7 @@ if (isset($_POST['insert_video_class'])) {
 
 	
 
-	if ($course_id == '' or $course_level_id == '' or $video_class_title == '' or $video_class_description == '' or $video_class_videos == '' or $video_class_status == '' or $video_thumbnail =='') 
+	if ($course_id == '' or $course_level_id == '' or $video_class_title == '' or $video_class_description == '' or $video_class_videos == '' or $video_class_status == '' or $video_thumbnail =='' or $video_class_url =='') 
 	{
 		echo "<script>alert('Please Fill the Blank Spaces')</script>";
 		exit;

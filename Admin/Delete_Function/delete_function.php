@@ -34,7 +34,7 @@ if (isset($_GET['delete_course_id'])) {
     }
 }
 
-// Fill in the Blanks
+// Fill in the Blanks Deletion
 
 if (isset($_GET['delete_fitb_id'])) {
     $delete_fitb_id = $_GET['delete_fitb_id'];
@@ -43,6 +43,22 @@ if (isset($_GET['delete_fitb_id'])) {
     if ($execute_delete_fitb) {
         echo "<script>alert('Fill in the Blanks Deleted Successfully')</script>";
         echo "<script>window.open('../view_fitb.php','_self')</script>";
+    }
+    else
+    {
+        mysqli_error($connection);
+    }
+}
+
+// Video Class Deletion
+
+if (isset($_GET['delete_video_id'])) {
+    $delete_video_id = $_GET['delete_video_id'];
+    $delete_video_query = "DELETE FROM `video_class_tbl` WHERE `video_class_tbl`.`video_class_id` = $delete_video_id";
+    $execute_delete_video = mysqli_query($connection,$delete_video_query);
+    if ($execute_delete_video) {
+        echo "<script>alert('Video Class Deleted Successfully')</script>";
+        echo "<script>window.open('../view_video_class.php','_self')</script>";
     }
     else
     {

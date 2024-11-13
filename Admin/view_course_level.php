@@ -56,6 +56,7 @@ include('./Layouts/sidebar.php');
  					 	$select_view_course_level_query="select * from course_level_tbl"; 
 					   	//Change this order by Concept
  					 	$result_view_course_level_query=mysqli_query($connection,$select_view_course_level_query);
+						$course_level_count = 1;
  					   	while($course_level=mysqli_fetch_assoc($result_view_course_level_query))
  					   	{
 				
@@ -74,7 +75,7 @@ include('./Layouts/sidebar.php');
 
                         
                             <tr data-expanded="true">
-                                <td>1</td>
+                                <td><?php echo $course_level_count; ?></td>
                                 <td><?php echo $course_level_name ?></td>
 
 								<?php
@@ -101,6 +102,7 @@ include('./Layouts/sidebar.php');
 											{
 												echo "<td><input type='button' value='Deactivate' class='button2'></td>";
 											}
+											$course_level_count++;
 										?>
 								
                                 

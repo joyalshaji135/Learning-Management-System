@@ -1,3 +1,12 @@
+<!-- Config Database Connection -->
+
+<?php
+
+include('./include/connection.php');
+
+?>
+
+
 <!--header start -->
 
 <?php
@@ -44,16 +53,58 @@ include('./Layouts/sidebar.php');
                             </tr>
                         </thead>
                         <tbody>
+
+						<!-- Video Class List -->
+
+						<?php
+
+						// video_class_id 	course_id 	course_level_id 	video_class_title 	video_class_description 	video_thumbnail 	
+						// video_class_videos 	video_class_url 	video_class_status
+							$select_video_class_query = "select * from video_class_tbl";
+							$execute_video_class_query = mysqli_query($connection,$select_video_class_query);
+							$video_class_count = 1;
+							while ($video_class_rows = mysqli_fetch_assoc($execute_video_class_query)) {
+								$video_class_id = $video_class_rows['video_class_id'];
+								$course_id = $video_class_rows['course_id'];
+								$course_level_id = $video_class_rows['course_level_id'];
+								$video_class_title = $video_class_rows['video_class_title'];
+								$video_class_description = $video_class_rows['video_class_description'];
+								$video_thumbnail = $video_class_rows['video_thumbnail'];
+								$video_class_videos = $video_class_rows['video_class_videos'];
+								$video_class_url = $video_class_rows['video_class_url'];
+								$video_class_status = $video_class_rows['video_class_status'];
+							
+						?>
                             <tr data-expanded="true">
-                                <td>1</td>
-                                <td>Basic Question</td>
-                                <td>This is a Basic Question</td>             
-                                <td>English</td>             
-                                <td>Intermediate</td>             
-                                <td><video src="./Video_Class/video1.mp4" style="height: 100px; width: 100px;"></video></td>             
-                                <td><input type="button" value="Update" class="button3"></td>
-                                <td><input type="button" value="Delete" class="button2"></td>
-                            </tr>                            
+                                <td><?php echo $video_class_count ?></td>
+                                <td><?php echo $video_class_title ?></td>
+                                <td><?php echo $video_class_description ?></td> 
+							
+								<?php
+								$select_course_query = "select * from course_tbl where course_id=$course_id";
+								$execute_course_query = mysqli_query($connection,$select_course_query);
+								while ($course_rows = mysqli_fetch_assoc($execute_course_query)) {
+									$course_name = $course_rows['course_name'];
+								}	
+								?>
+                                <td><?php echo $course_name ?></td>      
+								
+								<?php
+								$select_course_level_query = "select * from course_level_tbl where course_level_id = $course_level_id";
+								$execute_course_level_query = mysqli_query($connection,$select_course_level_query);
+								while($course_level_rows = mysqli_fetch_assoc($execute_course_level_query)){
+									$course_level_name = $course_level_rows['course_level_name'];
+								}
+								?>
+                                <td><?php echo $course_level_name; ?></td>             
+                                <td><video src="./Video_Class/<?php echo $video_class_videos ?>" style="height: 100px; width: 100px;"></video></td>             
+                                <td><a href="./update_video_class.php?update_video_id=<?php echo $video_class_id ?>"><input type="button" value="Update" class="button3"></a></td>
+                                <td><a href="./Delete_Function/delete_function.php?delete_video_id=<?php echo $video_class_id ?>"><input type="button" value="Delete" class="button2"></a></td>
+                            </tr>   
+							<?php
+							$video_class_count++;
+							}
+							?>                         
                         </tbody>
                     </table>
                 </div>
