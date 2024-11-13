@@ -1,3 +1,12 @@
+<!-- Include Database Connectivity -->
+
+<?php
+
+include('./include/connection.php');
+
+?>
+
+
 <!--header start -->
 
 <?php
@@ -43,15 +52,41 @@ include('./Layouts/sidebar.php');
                             </tr>
                         </thead>
                         <tbody>
+
+						<?php
+							$select_course_query = "select * from course_tbl";
+							$execute_course_query = mysqli_query($connection,$select_course_query);
+							$course_no = 1;
+							while ($course_rows = mysqli_fetch_assoc($execute_course_query)) {
+								$course_id = $course_rows['course_id'];
+								$course_name = $course_rows['course_name'];
+								$course_image = $course_rows['course_image'];
+								$course_status = $course_rows['course_status'];
+							
+						?>
                             <tr data-expanded="true">
-                                <td>1</td>
-                                <td>Phones</td>
-                                <td><img src="./img/1.png" alt="" srcset=""></td>
-                                <td><input type="button" value="View" class="button1"></td>
-                                <td><input type="button" value="Update" class="button3"></td>
-                                <td><input type="button" value="Delete" class="button2"></td>
-                                <td><input type="button" value="Activate" class="button3"></td>
-                            </tr>                            
+                                <td><?php echo $course_no ?></td>
+                                <td><?php echo $course_name ?></td>
+                                <td><img src="./Course_Image/<?php echo $course_image ?>" alt="" srcset="" style="height: 150px; width: 150px;"></td>
+                                <td><a href="./view_course.php"><input type="button" value="View" class="button1"></a></td>
+                                <td><a href="./update_course.php?update_course_id=<?php echo $course_id ?>"><input type="button" value="Update" class="button3"></a></td>
+                                <td><a href="./Delete_Function/delete_function.php?delete_course_id=<?php echo $course_id ?>"><input type="button" value="Delete" class="button2"></a></td>
+
+								<?php
+								if($course_status == 'active')
+								{
+									echo "<td><input type='button' value='Activate' class='button3'></td>";
+								}
+								else
+								{
+									echo "<td><input type='button' value='Deactivate' class='button2'></td>";
+								}
+                                ?>
+                            </tr> 
+							<?php
+							$course_no++;
+							}
+							?>
                         </tbody>
                     </table>
                 </div>

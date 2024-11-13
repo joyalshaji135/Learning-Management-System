@@ -48,6 +48,7 @@ include('./Layouts/sidebar.php');
                                         <div class="form-group">
                                             <div class="col-sm-3"></div>
                                             <div class="col-sm-6">
+                                                <label>Course Name</label>
                                                 <input type="text" class="form-control round-input" name="course_name">
                                             </div>
 
@@ -55,6 +56,7 @@ include('./Layouts/sidebar.php');
                                             <br><br><br>
                                             <div class="col-sm-3"></div>
                                             <div class="col-sm-6">
+                                            <label>Course Description</label>
                                                 <input type="text" class="form-control round-input" name="course_description">
                                             </div>
 

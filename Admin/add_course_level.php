@@ -50,7 +50,7 @@ include('./Layouts/sidebar.php');
                                         
                                         <div class="col-lg-6">
 
-
+                                          <label>Course Name</label>
                                         <select class="form-control m-bot15" name="course_id" style="text-align: center;">
                                             <option selected disabled>Option Select</option>
                                             
@@ -76,6 +76,7 @@ include('./Layouts/sidebar.php');
                                         <br><br><br>
                                             <div class="col-sm-3"></div>
                                             <div class="col-sm-6">
+                                            <label>Course Level</label>
                                             <select class="form-control m-bot15" name="course_level_name" style="text-align: center;">
                                                     <option selected disabled>Option Select</option>
                                                     <option value="Beginner">Beginner</option>

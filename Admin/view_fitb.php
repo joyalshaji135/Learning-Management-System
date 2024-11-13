@@ -1,3 +1,11 @@
+<!-- Database Configuration -->
+
+<?php
+
+include('./include/connection.php');
+
+?>
+
 <!--header start -->
 
 <?php
@@ -44,16 +52,54 @@ include('./Layouts/sidebar.php');
                             </tr>
                         </thead>
                         <tbody>
+
+						<?php
+							$select_fitb_query = "select * from filling_in_the_blanks_tbl";
+							$execute_fitb_query = mysqli_query($connection,$select_fitb_query);
+							$fitb_count = 1;
+							while ($fitb_rows = mysqli_fetch_assoc($execute_fitb_query)) {
+								//  fitb_id	course_id	course_level_id	fitb_title	fitb_description	
+								// first_sentence	last_sentence	option_a	option_b	option_c	option_d	
+								// answer_key	filb_status
+
+								$fitb_id = $fitb_rows['fitb_id'];
+								$course_id = $fitb_rows['course_id'];
+								$course_level_id = $fitb_rows['course_level_id'];
+								$fitb_title = $fitb_rows['fitb_title'];
+								$fitb_description = $fitb_rows['fitb_description'];
+								$first_sentence = $fitb_rows['first_sentence'];
+								$last_sentence = $fitb_rows['last_sentence'];
+							
+						?>
                             <tr data-expanded="true">
-                                <td>1</td>
-                                <td>Basic Question</td>
-                                <td>This is a Basic Question</td>             
-                                <td>English</td>             
-                                <td>Beginner</td>             
-                                <td>Question No : 1</td>             
-                                <td><input type="button" value="Update" class="button3"></td>
-                                <td><input type="button" value="Delete" class="button2"></td>
-                            </tr>                            
+                                <td><?php echo $fitb_count ?></td>
+                                <td><?php echo $fitb_title ?></td>
+                                <td><?php echo $fitb_description ?></td> 
+								<?php
+								$select_course_query = "select * from course_tbl where course_id=$course_id";
+								$execute_course_query = mysqli_query($connection,$select_course_query);
+								while ($course_rows = mysqli_fetch_assoc($execute_course_query)) {
+									$course_name = $course_rows['course_name'];
+								}	
+								?>
+                                <td><?php echo $course_name ?></td> 
+								<?php
+								$select_course_level_query = "select * from course_level_tbl where course_level_id = $course_level_id";
+								$execute_course_level_query = mysqli_query($connection,$select_course_level_query);
+								while($course_level_rows = mysqli_fetch_assoc($execute_course_level_query)){
+									$course_level_name = $course_level_rows['course_level_name'];
+								}
+								?>
+								<td><?php echo $course_level_name; ?></td>           
+                                <td><?php echo $first_sentence ?> ---------- <?php echo $last_sentence ?></td>             
+                                <td><a href="./update_fitb_class.php?update_fitb_id=<?php echo $fitb_id ?>"><input type="button" value="Update" class="button3"></a></td>
+                                <td><a href="./Delete_Function/delete_function.php?delete_fitb_id=<?php echo $fitb_id ?>"><input type="button" value="Delete" class="button2"></a></td>
+                            </tr>
+							
+						<?php
+						$fitb_count++;
+						}
+						?>
                         </tbody>
                     </table>
                 </div>
