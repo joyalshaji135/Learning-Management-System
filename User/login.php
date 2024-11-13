@@ -1,4 +1,8 @@
+<?php
 
+include('./include/connection.php');
+@session_start();
+?>
 <!doctype html>
 <html lang="en">
 

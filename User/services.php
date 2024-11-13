@@ -131,7 +131,46 @@ include('./include/connection.php');
          ?>
 
 
+        <?php
+          
+					if(!isset($_SESSION['username']))
+					{
+						
 
+            ?>
+            <div class="col-lg-4 col-md-6 mt-md-0 mt-4 mb-lg-5">
+          <div class="card">
+            <div class="card-header p-0 position-relative">
+
+              <a href="./login.php">
+                <img class="card-img-bottom d-block radius-image-full" src="../Admin/Course_Image/<?php echo $course_image ?>" alt="Card image cap" style="height: 200px
+                ;">
+              </a>
+            </div>
+            <div class="card-body blog-details">
+              <p class="price-review"><?php echo $course_name ?></p>
+              <a href="course_program.php?course_id=<?php echo $course_id ?>" class="blog-desc mt-2"><?php echo $course_description ?>
+              </a>
+              <div class="course-meta mt-1">
+                <div class="meta-item course-lesson">
+                  <span class="fa "></span>
+                </div>
+                <div class="meta-item course-students">
+                  <span class=""></span>
+                  <a href="./login.php">
+                  <span class="fa fa-lock"></span>
+                  <span class="meta-value"> Locked </span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <?php
+					}
+          else
+					{
+        ?>
         <div class="col-lg-4 col-md-6 mt-md-0 mt-4 mb-lg-5">
           <div class="card">
             <div class="card-header p-0 position-relative">
@@ -161,10 +200,10 @@ include('./include/connection.php');
           </div>
         </div>
         
-<?php
-
+      <?php
+                }
             }
-?>
+      ?>
 
       </div>
       <div class="course-button mt-lg-4 text-center">
