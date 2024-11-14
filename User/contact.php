@@ -1,3 +1,10 @@
+<?php
+
+include('./include/connection.php');
+
+session_start();
+?>
+
 
 <!doctype html>
 <html lang="en">
@@ -57,12 +64,31 @@
                         <li class="nav-item">
                             <a class="nav-link" href="services.php">Courses</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./registration.php">Registration</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./login_redirection.php">Login</a>
-                        </li>
+                        <?php
+					        if(!isset($_SESSION['client_username']))
+					        {
+				              echo "
+                                  <li class='nav-item'>
+                                      <a class='nav-link' href='./registration.php'>Registration</a>
+                                  </li>
+                                  <li class='nav-item'>
+                                    <a class='nav-link' href='./login_redirection.php'>Login</a>
+                                  </li>
+                              ";
+				            }
+                            else
+				            {
+                              $client_username = $_SESSION['client_username'];
+				              echo "
+                                <li class='nav-item'>
+                                    <a class='nav-link' href='./account_setting.php'>Account Settings</a>
+                                </li>
+                                <li class='nav-item'>
+                                  <a class='nav-link' href='./logout.php'>Logout</a>
+                                </li>
+                              ";
+				            }
+				  	    ?>
                         <li class="nav-item active">
                             <a class="nav-link" href="contact.php">Contact</a>
                         </li>

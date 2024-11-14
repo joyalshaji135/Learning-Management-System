@@ -2,6 +2,8 @@
 
 include('./include/connection.php');
 @session_start();
+
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -158,15 +160,15 @@ include('./include/connection.php');
                             </div>
                             <form action="#" method="post">
                                 <div class="twice">
-                                    <input type="text" class="form-control" name="w3lSubject" id="w3lSubject"
-                                        placeholder="Username" required="">
+                                    <input type="text" class="form-control" name="client_username" id="w3lSubject"
+                                        placeholder="client_username" required="">
                                 </div>
                                 <div class="twice">
-                                    <input type="password" class="form-control" name="w3lSubject" id="w3lSubject"
-                                        placeholder="Password" required="">
+                                    <input type="password" class="form-control" name="client_password" id="w3lSubject"
+                                        placeholder="client_password" required="">
                                 </div>
                                 <div class="text-right">
-                                    <input type="submit" value="Login" class="btn btn-primary btn-style mt-4" style="background-color: #f35b04;">
+                                    <input type="submit" value="Login" name="client_login" class="btn btn-primary btn-style mt-4" style="background-color: #f35b04;">
                                 </div>
                             </form>
                         </div>
@@ -184,5 +186,37 @@ include('./include/connection.php');
 <?php
 
 include('./Layouts/footer.php');
+
+?>
+
+<?php
+
+if (isset($_POST['client_login'])) {
+    $client_username = $_POST['client_username'];
+    $client_password = $_POST['client_password'];
+ // $client_hash_password = password_hash($client_password, PASSWORD_DEFAULT);
+
+    $select_client_registration_query="select * from client_registration_tbl where client_username='$client_username'";
+    $execute_client_registration_query=mysqli_query($connection,$select_client_registration_query);
+    $client_row_data=mysqli_fetch_assoc($execute_client_registration_query);
+    
+    if ($execute_client_registration_query) {
+        $_SESSION['client_username']=$client_username;
+        if(password_verify($client_password,$client_row_data['client_password']))
+		{
+            $_SESSION['client_username']=$client_username;
+			echo "<script>alert('Login SuccessFully')</script>";
+			echo "<script>window.open('services.php','_self')</script>";
+        }
+        else
+        {
+            echo "<script>alert('Incorrect Password')</script>";
+        }
+    }
+    else
+    {
+        echo "<script>alert('Invalid Client ')</script>";
+    }
+}
 
 ?>

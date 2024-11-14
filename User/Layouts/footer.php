@@ -61,7 +61,7 @@
             <div class="row bottom-copies">
                 <p class="col-lg-8 copy-footer-29">© 2024 LearnUpon. All rights reserved. Design by <a
                         href="https://joyal-shaji.netlify.app/" target="_blank">
-                        Joyal Shaji</a></p>
+                        Sherin</a></p>
 
                 <div class="col-lg-4 footer-list-29">
                     <ul class="d-flex text-lg-right justify-content-center mt-lg-0 mt-3">
