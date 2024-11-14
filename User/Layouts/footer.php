@@ -26,8 +26,30 @@
                             <h6 class="footer-title-29">Usefull Links</h6>
                             <li><a href="about.php">About Us</a></li>
                             <li><a href="services.php">Courses</a></li>
-                            <li><a href="registration.php">Registration</a></li>
-                            <li><a href="login.php"> Login</a></li>
+                            <?php
+				            if(!isset($_SESSION['client_username']))
+				            {
+				            	echo "
+                                <li>
+                                    <a href='./registration.php'>Registration</a>
+                                </li>
+                                <li>
+                                  <a href='./login_redirection.php'>Login</a>
+                                </li>";
+				            }
+                            else
+				            {
+                              $client_username = $_SESSION['client_username'];
+				            	      	echo "
+                              <li>
+                                  <a href='./account_setting.php'>Account Settings</a>
+                              </li>
+                              <li>
+                                <a href='./logout.php'>Logout</a>
+                              </li>
+                              ";
+				            	      }
+				  	?>
                             <li><a href="contact.php">Feedbacks</a></li>
                         </ul>
                     </div>

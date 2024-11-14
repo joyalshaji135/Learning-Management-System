@@ -12,8 +12,10 @@
 	<img class="wave" src="img/wave.png">
 	<div class="container">
 		<div class="img">
-			<img src="img/logo.png">
-			<h2 class="title">learning Plateform</h2>
+		<a href="../User/index.php">
+			<img src="img/site_logo.png">
+			<h2 class="title">Learning Plateform</h2>
+		</a>
 		</div>
 		<div class="login-content">
 			<form action="index.html">
