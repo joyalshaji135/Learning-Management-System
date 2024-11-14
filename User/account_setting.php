@@ -65,30 +65,30 @@ session_start();
               <a class="nav-link" href="services.php">Courses</a>
             </li>
             <?php
-					        if(!isset($_SESSION['client_username']))
-					        {
-				              echo "
-                                  <li class='nav-item'>
-                                      <a class='nav-link' href='./registration.php'>Registration</a>
-                                  </li>
-                                  <li class='nav-item'>
-                                    <a class='nav-link' href='./login_redirection.php'>Login</a>
-                                  </li>
-                              ";
-				            }
-                            else
-				            {
-                              $client_username = $_SESSION['client_username'];
-				              echo "
-                                <li class='nav-item'>
-                                    <a class='nav-link' href='./account_setting.php'>Account Settings</a>
-                                </li>
-                                <li class='nav-item'>
-                                  <a class='nav-link' href='./logout.php'>Logout</a>
-                                </li>
-                              ";
-				            }
-				  	    ?>
+				if(!isset($_SESSION['client_username']))
+				{
+				  echo "
+                      <li class='nav-item'>
+                          <a class='nav-link' href='./registration.php'>Registration</a>
+                      </li>
+                      <li class='nav-item'>
+                        <a class='nav-link' href='./login_redirection.php'>Login</a>
+                      </li>
+                  ";
+				}
+                else
+				{
+                  $client_username = $_SESSION['client_username'];
+				  echo "
+                    <li class='nav-item'>
+                        <a class='nav-link' href='./account_setting.php'>Account Settings</a>
+                    </li>
+                    <li class='nav-item'>
+                      <a class='nav-link' href='./logout.php'>Logout</a>
+                    </li>
+                  ";
+				}
+			?>
 
             <li class="nav-item">
               <a class="nav-link" href="contact.php">Contact</a>
@@ -120,7 +120,9 @@ session_start();
       <div class="container">
         <ul class="breadcrumbs-custom-path">
           <li><a href="index.php">Home</a></li>
-          <li class="active"><span class="fa fa-chevron-right mx-2" aria-hidden="true"></span> About Us</li>
+          <li class="active"><span class="fa fa-chevron-right mx-2" aria-hidden="true"></span> Account : 
+                <?php echo $client_username ?>
+        </li>
         </ul>
       </div>
     </section>
