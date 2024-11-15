@@ -1,3 +1,9 @@
+<!-- connection start -->
+<?php
+
+include('./include/connection.php');
+session_start();
+?>
 <!DOCTYPE html>
 <head>
 <title>Admin Panel</title>
@@ -10,7 +16,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link rel="stylesheet" href="css/bootstrap.min.css" >
 <!-- //bootstrap-css -->
 <!-- Link Icon -->
-<link rel="shortcut icon" href="./img/logo.png" type="image/x-icon">
+<link rel="shortcut icon" href="./img/site_logo.png" type="image/x-icon">
 <!-- Custom CSS -->
 <link href="css/style.css" rel='stylesheet' type='text/css' />
 <link href="css/style-responsive.css" rel="stylesheet"/>
@@ -91,11 +97,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                 <img alt="" src="images/2.png">
-                <span class="username">Admin</span>
+                <?php
+                   $admin_username = $_SESSION['admin_username'];
+                   echo $admin_username;
+                ?>
+                <span class="username"><?php echo $admin_username ?></span>
                 <b class="caret"></b>
             </a>
             <ul class="dropdown-menu extended logout">
-                <li><a href="login.html"><i class="fa fa-key"></i> Log Out</a></li>
+                <li><a href="login.php"><i class="fa fa-key"></i> Log Out</a></li>
             </ul>
         </li>
         <!-- user login dropdown end -->

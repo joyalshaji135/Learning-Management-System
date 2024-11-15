@@ -3,7 +3,7 @@
 <?php
 
 include('./include/connection.php');
-@session_start();
+
 ?>
 
 <!DOCTYPE html>
@@ -47,9 +47,8 @@ include('./include/connection.php');
            		    	<input type="password" class="input" name="admin_password">
             	   </div>   
             	</div>
-				<!-- <a href="./superadmin.php">super admin</a> -->
 				<br>
-            	<input type="submit" class="btn" value="Login" name="admin_login">
+            	<input type="submit" class="btn" value="Login" name="super_admin_registration">
             </form>
         </div>
     </div>
@@ -80,30 +79,4 @@ include('./include/connection.php');
 				}            
              }	
 
-?>
-
-<?php
-	if(isset($_POST['admin_login']))
-	{
-		$admin_username=$_POST['admin_username'];
-        $admin_password=$_POST['admin_password'];
-		//Select User Query
-		$select_admin_login_query="Select * from admin_tbl where admin_username='$admin_username'";
-		$execute_admin_login_query=mysqli_query($connection,$select_admin_login_query);
-		$row_data=mysqli_fetch_assoc($execute_admin_login_query);
-
-		
-			$_SESSION['admin_username']=$admin_username;
-			if(password_verify($admin_password,$row_data['admin_password']))
-			{
-                $_SESSION['admin_username']=$admin_name;
-					echo "<script>alert('Login SuccessFully')</script>";
-					echo "<script>window.open('index.php','_self')</script>";
-
-			}else
-			{
-				echo "<script>alert('Invalid Credantial')</script>";
-			}
-		
-	}
 ?>
